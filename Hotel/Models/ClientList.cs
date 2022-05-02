@@ -14,7 +14,6 @@ namespace Hotel
 
         public string FullNameClient { get; set; }
         public DateTime? DateOfBirth { get; set; }        
-        public int? PassportID { get; set; }
         public int GenderId { get; set; }
         [System.ComponentModel.DataAnnotations.Schema.ForeignKey("GenderId")]
         public Gender Gender { get; set; }       

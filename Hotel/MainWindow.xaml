@@ -5,9 +5,33 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Hotel"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Готель" Height="450" Width="800">
     <Grid>
         <TabControl x:Name="tabControl">
+            <TabItem Header="Додати">
+                <Grid Background="#FFE5E5E5" Height="401">
+                    <Button x:Name="btn_Add" Content="Додати" HorizontalAlignment="Left" Margin="34,181,0,0" VerticalAlignment="Top" Click="btn_Add_Click" Width="738" Height="51"/>
+                    <TextBox x:Name="tb_RoomCodeNumber" HorizontalAlignment="Left" Margin="402,35,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                    <TextBox x:Name="tb_RoomClass" HorizontalAlignment="Left" Margin="402,68,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                    <TextBox x:Name="tb_RoomPrice" HorizontalAlignment="Left" Margin="402,105,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                    <TextBox x:Name="tb_ClientFullNameClient" HorizontalAlignment="Left" Margin="652,35,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                    <TextBox x:Name="tb_GenderGenderName" HorizontalAlignment="Left" Margin="652,105,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                    <Label x:Name="lbl" Content="Дата бронювання" HorizontalAlignment="Left" Margin="34,31,0,0" VerticalAlignment="Top"/>
+                    <Label x:Name="lbl_Copy" Content="Дата поселення" HorizontalAlignment="Left" Margin="46,64,0,0" VerticalAlignment="Top"/>
+                    <Label x:Name="lbl_Copy1" Content="Дата виселення" HorizontalAlignment="Left" Margin="47,101,0,0" VerticalAlignment="Top"/>
+                    <Label x:Name="label3" Content="Номер кімнати" HorizontalAlignment="Left" Margin="304,31,0,0" VerticalAlignment="Top"/>
+                    <Label x:Name="label3_Copy" Content="Клас номера" HorizontalAlignment="Left" Margin="317,64,0,0" VerticalAlignment="Top"/>
+                    <Label x:Name="label3_Copy1" Content="Вартість" HorizontalAlignment="Left" Margin="342,101,0,0" VerticalAlignment="Top"/>
+                    <Label x:Name="label3_Copy2" Content="ПІБ" HorizontalAlignment="Left" Margin="619,31,0,0" VerticalAlignment="Top"/>
+                    <Label x:Name="label3_Copy3" Content="Дата народження" HorizontalAlignment="Left" Margin="540,62,0,0" VerticalAlignment="Top"/>
+                    <Label x:Name="label3_Copy4" Content="Стать" HorizontalAlignment="Left" Margin="608,101,0,0" VerticalAlignment="Top"/>
+                    <DatePicker x:Name="datePickerResDateReservation" HorizontalAlignment="Left" Margin="164,33,0,0" VerticalAlignment="Top" Width="113"/>
+                    <DatePicker x:Name="datePickerResDateOfEntry" HorizontalAlignment="Left" Margin="164,65,0,0" VerticalAlignment="Top" Width="113"/>
+                    <DatePicker x:Name="datePickerResDateDeparture" HorizontalAlignment="Left" Margin="164,101,0,0" VerticalAlignment="Top" Width="113"/>
+                    <DatePicker x:Name="datePickerClientDateOfBirth" HorizontalAlignment="Left" Margin="652,66,0,0" VerticalAlignment="Top" Width="120"/>
+
+                </Grid>
+            </TabItem>
             <TabItem Header="Бронювання">
                 <Grid Background="#FFE5E5E5" Height="395">
                     <DataGrid x:Name="dataGridRes" ColumnWidth="*" AutoGenerateColumns="False" Margin="0,0,186,0" Height="385" VerticalAlignment="Bottom">
@@ -16,12 +40,12 @@
                             <DataGridTextColumn Header="Id Клієнта" Binding="{Binding ClientListId}"/>
                             <DataGridTextColumn Header="Id Номера" Binding="{Binding RoomNumberId}"/>
                             <DataGridTextColumn Header="Дата бронювання" Binding="{Binding DateReservation}"/>
-                            <DataGridTextColumn Header="Дата вїзду" Binding="{Binding DateOfEntry}"/>
-                            <DataGridTextColumn Header="Дата виїзду" Binding="{Binding DateDeparture}"/>
+                            <DataGridTextColumn Header="Дата поселення" Binding="{Binding DateOfEntry}"/>
+                            <DataGridTextColumn Header="Дата виселення" Binding="{Binding DateDeparture}"/>
                         </DataGrid.Columns>
                     </DataGrid>
-                    <Button x:Name="btn_UpdateReserv" Content="Оновити" HorizontalAlignment="Left" Margin="663,49,0,0" VerticalAlignment="Top" Height="40" Width="88" Click="btn_UpdateReserv_Click"/>
-                    <Button x:Name="btn_DeleteRes" Content="Видалити" HorizontalAlignment="Left" Margin="663,165,0,0" Width="88" Height="40" VerticalAlignment="Top" Click="btn_DeleteRes_Click"/>
+                    <Button x:Name="btn_UpdateReserv" Content="Оновити" HorizontalAlignment="Left" Margin="638,49,0,0" VerticalAlignment="Top" Height="40" Width="113" Click="btn_UpdateReserv_Click"/>
+                    <Button x:Name="btn_DeleteRes" Content="Видалити" HorizontalAlignment="Left" Margin="638,165,0,0" Width="113" Height="40" VerticalAlignment="Top" Click="btn_DeleteRes_Click"/>
                     <TextBox x:Name="tb_DelRes" HorizontalAlignment="Left" Margin="663,142,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="88"/>
                     <Label x:Name="label" Content="Id" HorizontalAlignment="Left" Margin="638,138,0,0" VerticalAlignment="Top"/>
 
@@ -37,10 +61,10 @@
                             <DataGridTextColumn Header="Вартість" Binding="{Binding Price}"/>
                         </DataGrid.Columns>
                     </DataGrid>
-                    <Button x:Name="btn_UpdateRoom" Content="Оновити" HorizontalAlignment="Left" Margin="663,49,0,0" VerticalAlignment="Top" Height="40" Width="88" Click="btn_UpdateRoom_Click"/>
+                    <Button x:Name="btn_UpdateRoom" Content="Оновити" HorizontalAlignment="Left" Margin="638,49,0,0" VerticalAlignment="Top" Height="40" Width="113" Click="btn_UpdateRoom_Click"/>
                     <TextBox x:Name="tb_DelRoom" HorizontalAlignment="Left" Margin="663,142,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="88"/>
                     <Label x:Name="label1" Content="Id" HorizontalAlignment="Left" Margin="638,138,0,0" VerticalAlignment="Top"/>
-                    <Button x:Name="btn_UpdateRoom1" Content="Видалити" HorizontalAlignment="Left" Margin="663,165,0,0" Width="88" Height="40" VerticalAlignment="Top" Click="btn_UpdateRoom1_Click"/>
+                    <Button x:Name="btn_UpdateRoom1" Content="Видалити" HorizontalAlignment="Left" Margin="638,165,0,0" Width="113" Height="40" VerticalAlignment="Top" Click="btn_UpdateRoom1_Click"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Клієнти">
@@ -50,20 +74,13 @@
                             <DataGridTextColumn Header="Id" Binding="{Binding IdClient}"/>
                             <DataGridTextColumn Header="ПІБ" Binding="{Binding         FullNameClient}"/>
                             <DataGridTextColumn Header="Дата народження" Binding="{Binding         DateOfBirth}"/>
-                            <DataGridTextColumn Header="Код паспорта" Binding="{Binding PassportID}"/>
                             <DataGridTextColumn Header="Стать" Binding="{Binding Gender.GenderName}"/>
                         </DataGrid.Columns>
                     </DataGrid>
-                    <Button x:Name="btn_UpdateClient" Content="Оновити" HorizontalAlignment="Left" Margin="663,49,0,0" VerticalAlignment="Top" Height="40" Width="88" Click="btn_UpdateClient_Click"/>
-                    <Button x:Name="btn_DeleteClient" Content="Видалити" HorizontalAlignment="Left" Margin="663,165,0,0" Width="88" Height="40" VerticalAlignment="Top" Click="btn_DeleteClient_Click"/>
+                    <Button x:Name="btn_UpdateClient" Content="Оновити" HorizontalAlignment="Left" Margin="638,49,0,0" VerticalAlignment="Top" Height="40" Width="113" Click="btn_UpdateClient_Click"/>
+                    <Button x:Name="btn_DeleteClient" Content="Видалити" HorizontalAlignment="Left" Margin="638,165,0,0" Width="113" Height="40" VerticalAlignment="Top" Click="btn_DeleteClient_Click"/>
                     <Label x:Name="label2" Content="Id" HorizontalAlignment="Left" Margin="638,138,0,0" VerticalAlignment="Top"/>
                     <TextBox x:Name="tb_DelClient" HorizontalAlignment="Left" Margin="663,142,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="88"/>
-                </Grid>
-            </TabItem>
-            <TabItem Header="Додати">
-                <Grid Background="#FFE5E5E5" Height="395">
-                    <Button x:Name="btn_Add" Content="Додати" HorizontalAlignment="Left" Margin="335,266,0,0" VerticalAlignment="Top" Click="btn_Add_Click"/>
-
                 </Grid>
             </TabItem>
         </TabControl>

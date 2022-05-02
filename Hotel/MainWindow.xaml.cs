@@ -45,66 +45,92 @@ namespace Hotel
         }
         private void btn_Add_Click(object sender, RoutedEventArgs e)
         {
-            using (db = new ApplicationContext())
+            try
             {
-                Gender gender = new Gender
+                using (db = new ApplicationContext())
                 {
-                    GenderName = "Жіноча"
-                };
-                int? keygender = db.Genders.SingleOrDefault(x => x.GenderName == gender.GenderName)?.IdGender;
-                if (keygender == null)
-                {
-                    db.Genders.Add(gender);
+                    Gender gender = new Gender
+                    {
+                        GenderName = tb_GenderGenderName.Text
+                    };
+                    int? keygender = db.Genders.SingleOrDefault(x => x.GenderName == gender.GenderName)?.IdGender;
+                    if (keygender == null)
+                    {
+                        db.Genders.Add(gender);
+                        db.SaveChanges();
+                    }
+                    ClientList clientList = new ClientList
+                    {
+                        FullNameClient = tb_ClientFullNameClient.Text,
+                        DateOfBirth = DateTime.Parse(datePickerClientDateOfBirth.Text),
+                        GenderId = gender.IdGender
+                    };
+                    if (keygender != null)
+                    {
+                        clientList.GenderId = (int)keygender;
+                        db.SaveChanges();
+                    }
+                    db.Add(clientList);
                     db.SaveChanges();
-                }
-                ClientList clientList = new ClientList
-                {
-                    FullNameClient = "qw",
-                    PassportID = 123,
-                    GenderId = gender.IdGender
-                };
-                if (keygender != null)
-                {
-                    clientList.GenderId = (int)keygender;
+                    RoomClass roomClass = new RoomClass
+                    {
+                        Class = tb_RoomClass.Text
+                    };
+                    int? keyroomClass = db.RoomClasses.SingleOrDefault(x => x.Class == roomClass.Class)?.IdClass;
+                    if (keyroomClass == null)
+                    {
+                        db.RoomClasses.Add(roomClass);
+                        db.SaveChanges();
+                    }
+                    RoomNumber roomNumber = new RoomNumber
+                    {
+                        CodeNumber = int.Parse(tb_RoomCodeNumber.Text),
+                        RoomClassId = roomClass.IdClass,
+                        Price = int.Parse(tb_RoomPrice.Text)
+                    };
+                    if (keyroomClass != null)
+                    {
+                        roomNumber.RoomClassId = (int)keyroomClass;
+                        db.SaveChanges();
+                    }
+                    db.Add(roomNumber);
                     db.SaveChanges();
-                }
-                db.Add(clientList);
-                db.SaveChanges();
-                RoomClass roomClass = new RoomClass
-                {
-                    Class = "Бізнес"
-                };
-                int? keyroomClass = db.RoomClasses.SingleOrDefault(x => x.Class == roomClass.Class)?.IdClass;
-                if (keyroomClass == null)
-                {
-                    db.RoomClasses.Add(roomClass);
-                    db.SaveChanges();
-                }
-                RoomNumber roomNumber = new RoomNumber
-                {
-                    CodeNumber = 1,
-                    RoomClassId = roomClass.IdClass,
-                    Price = 2000
-                };
-                if (keyroomClass != null)
-                {
-                    roomNumber.RoomClassId = (int)keyroomClass;
-                    db.SaveChanges();
-                }
-                db.Add(roomNumber);
-                db.SaveChanges();
-                Reservation reservation = new Reservation
-                {
-                    ClientListId = clientList.IdClient,
-                    RoomNumberId = roomNumber.IdRoom
-                };
-                db.Add(reservation);
-                db.SaveChanges();
+                    Reservation reservation = new Reservation
+                    {
+                        ClientListId = clientList.IdClient,
+                        RoomNumberId = roomNumber.IdRoom,
+                        DateReservation = DateTime.Parse(datePickerResDateReservation.Text),
+                        DateOfEntry = DateTime.Parse(datePickerResDateOfEntry.Text),
+                        DateDeparture = DateTime.Parse(datePickerResDateDeparture.Text)
 
-                Load();
+                    };
+
+
+
+                    db.Add(reservation);
+                    db.SaveChanges();
+
+                    Load();
+                    MessageBox.Show("Дані додано!");
+                    TextClean();
+                }
+            }catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
-
+        void TextClean()
+        {
+            tb_GenderGenderName.Text = "";
+            tb_RoomCodeNumber.Text = "";
+            tb_RoomClass.Text = "";
+            tb_ClientFullNameClient.Text = "";
+            tb_RoomPrice.Text = "";
+            datePickerClientDateOfBirth.Text = "";
+            datePickerResDateDeparture.Text = "";
+            datePickerResDateOfEntry.Text = "";
+            datePickerResDateReservation.Text = "";
+        }
         private void btn_UpdateReserv_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -179,7 +205,6 @@ namespace Hotel
                                                  select d).Single();
                     updateClient.FullNameClient = (dataGridClient.SelectedItem as ClientList).FullNameClient;                    
                     updateClient.DateOfBirth = (dataGridClient.SelectedItem as ClientList).DateOfBirth;        
-                    updateClient.PassportID = (dataGridClient.SelectedItem as ClientList).PassportID;
                     updateGender.GenderName = (dataGridClient.SelectedItem as ClientList).Gender.GenderName;
                     db.SaveChanges();
                     Load();
